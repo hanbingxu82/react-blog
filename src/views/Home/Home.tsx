@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-08 10:02:12
+ * @LastEditTime: 2021-03-08 13:39:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -15,8 +15,11 @@ import styles from "./Home.module.less";
 import Header from "../../components/Header/Header";
 
 // 引入图片
-import img from "../../assets/images/1587477767089.jpg"
+import img from "../../assets/images/1587477767089.jpg";
+// import imgSrc from '../../assets/images/gotop.png'
 
+// 引入点击回到顶部
+import Gotop from '../../components/GoTop/GoTop';
 class Home extends Component {
   constructor(props: any) {
     super(props);
@@ -43,10 +46,10 @@ class Home extends Component {
     return (
       <div>
         <Header {...state} />
-        {
-          state.navName.map((item:any)=>{
-             /* 内容区域 */ console.log(item)
-            return  <div className={styles.box}>       
+        {state.navName.map((item: any) => {
+          /* 内容区域 */ console.log(item);
+          return (
+            <div key={item.href} className={styles.box}>
               {/* 左侧线 */}
               <div className={styles.leftLine}>
                 <span className={styles.circle}></span>
@@ -65,7 +68,7 @@ class Home extends Component {
                 </div>
                 {/* 内容显示区--图片区 */}
                 <div className={styles.imgs}>
-                  <img src={img} alt=""/>
+                  <img src={img} alt="" />
                 </div>
                 {/* 内容显示区--详情内容 */}
                 <div className={styles.details}>
@@ -73,10 +76,14 @@ class Home extends Component {
                 </div>
               </div>
             </div>
-    
-          })
-        }
-        <div><p className={styles.bottomp}>© SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a></p></div>
+          );
+        })}
+        <div>
+          <p className={styles.bottomp}>
+            © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
+          </p>
+        </div>
+        <Gotop />
       </div>
     );
   }

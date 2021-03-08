@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 15:39:38
- * @LastEditTime: 2021-03-06 17:14:29
+ * @LastEditTime: 2021-03-08 13:07:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/react-app-env.d.ts
@@ -87,3 +87,5 @@ declare module '*.less' {
     const content: { [key: string]: any }
     export default content
   }
+  
+  declare module 'react-go-top'
