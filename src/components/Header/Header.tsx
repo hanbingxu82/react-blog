@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-07 09:55:48
- * @LastEditTime: 2021-03-07 10:11:38
+ * @LastEditTime: 2021-03-08 10:22:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/components/Header/Header.tsx
@@ -28,7 +28,7 @@ class Header extends Component {
         </div>
         {/* 名称部分 */}
         <div className={styles.name}>
-          <p className={styles.p}>RedSpite</p>
+          <p className={styles.p}>SmallTinkerbell</p>
         </div>
         {/* 简历  点滴  留言部分 */}
         <div className={styles.nav}>
