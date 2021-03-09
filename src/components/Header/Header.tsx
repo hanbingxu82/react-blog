@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-07 09:55:48
- * @LastEditTime: 2021-03-08 10:22:34
+ * @LastEditTime: 2021-03-09 11:03:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/components/Header/Header.tsx
@@ -16,7 +16,11 @@ interface Istate {
 class Header extends Component {
   constructor(props: any) {
     super(props);
-    console.log(this.props)
+    console.log(props)
+  }
+  goNav=(nav:string)=>{
+    const props:any = this.props
+    props.history.push({pathname:nav})
   }
   render() {
     const props:any = this.props;
@@ -33,7 +37,7 @@ class Header extends Component {
         {/* 简历  点滴  留言部分 */}
         <div className={styles.nav}>
           {props.navName.map((item: Istate) => {
-            return <div key={item.href}>{item.nav}</div>;
+            return <div onClick={()=>{this.goNav(item.href)}} key={item.href} style={props.active===item.href?{textDecoration:'underline'}:{}}>{item.nav}</div>;
           })}
         </div>
       </div>

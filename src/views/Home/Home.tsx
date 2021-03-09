@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-08 13:39:04
+ * @LastEditTime: 2021-03-09 11:07:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -19,7 +19,7 @@ import img from "../../assets/images/1587477767089.jpg";
 // import imgSrc from '../../assets/images/gotop.png'
 
 // 引入点击回到顶部
-import Gotop from '../../components/GoTop/GoTop';
+import Gotop from "../../components/GoTop/GoTop";
 class Home extends Component {
   constructor(props: any) {
     super(props);
@@ -31,7 +31,7 @@ class Home extends Component {
         },
         {
           nav: "点滴",
-          href: "/Home",
+          href: "/",
         },
         {
           nav: "留言",
@@ -40,12 +40,23 @@ class Home extends Component {
       ],
     };
   }
+  /**
+   * @description: 跳转星晴路由
+   * @param {*}
+   * @return {*}
+   */
+  goDetails = (id: string) => {
+      const props :any = this.props
+      window.sessionStorage.setItem('detailsId',id)
+      props.history.push({pathname:'/Details'})
+  };
   login = () => {};
   render() {
     const state: any = this.state;
+    const props: any = this.props;
     return (
       <div>
-        <Header {...state} />
+        <Header active="/" {...state} {...props}  />
         {state.navName.map((item: any) => {
           /* 内容区域 */ console.log(item);
           return (
@@ -58,13 +69,20 @@ class Home extends Component {
               {/* 右侧内容区域 */}
               <div className={styles.rightContent}>
                 {/* 内容显示区--日期显示标题头 */}
-                <a className={styles.dates} href="/detail?id=5e9efd26601bd82819211a1e">
+                <div
+                  className={styles.dates}
+                  onClick={() => {
+                    this.goDetails("5e9efd26601bd82819211a1e");
+                  }}
+                >
                   <span className={styles.trig}></span>
                   <span className={styles.date}>2019.03.20</span>
-                </a>
+                </div>
                 {/* 内容显示区--标题内容 */}
                 <div className={styles.title}>
-                  <p className={styles.p}>ubuntu 从零搭建环境，部署项目</p>
+                  <p className={styles.p} onClick={() => {
+                    this.goDetails("5e9efd26601bd82819211a1e");
+                  }}>ubuntu 从零搭建环境，部署项目</p>
                 </div>
                 {/* 内容显示区--图片区 */}
                 <div className={styles.imgs}>
