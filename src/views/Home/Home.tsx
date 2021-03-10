@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-09 11:07:32
+ * @LastEditTime: 2021-03-09 17:46:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -35,7 +35,7 @@ class Home extends Component {
         },
         {
           nav: "留言",
-          href: "/Message",
+          href: "/Messages",
         },
       ],
     };
