@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-03-10 15:20:54
+ * @LastEditTime: 2021-03-10 16:47:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
@@ -57,7 +57,7 @@ class Messages extends Component {
     return (
       <div>
         {/* 头部组件区 */}
-        <Header active="/Messages" {...state} />
+        <Header active="/Messages" {...props} {...state} />
         {/* 留言板区域 */}
         <div className={styles.box}>
           <p className={styles.title}>留言板</p>
