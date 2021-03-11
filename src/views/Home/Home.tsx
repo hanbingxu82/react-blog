@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-09 17:46:30
+ * @LastEditTime: 2021-03-11 10:51:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -41,7 +41,7 @@ class Home extends Component {
     };
   }
   /**
-   * @description: 跳转星晴路由
+   * @description: 跳转详情路由
    * @param {*}
    * @return {*}
    */

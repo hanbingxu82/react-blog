@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-03-10 16:47:27
+ * @LastEditTime: 2021-03-11 08:53:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
@@ -10,11 +10,13 @@ import React, { Component } from "react";
 import styles from "./Messages.module.less";
 // 引入Header组件
 import Header from "../../components/Header/Header";
+import Music from '../../components/Music/Music';
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+
 
 const MaterialStyle = {
   inputWidth: {
@@ -105,6 +107,7 @@ class Messages extends Component {
             © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
           </p>
         </div>
+        <Music />
         <Gotop />
       </div>
     );

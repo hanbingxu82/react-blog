@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 15:39:38
- * @LastEditTime: 2021-03-08 13:07:59
+ * @LastEditTime: 2021-03-11 09:03:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/react-app-env.d.ts
@@ -78,6 +78,10 @@ declare module '*.module.sass' {
   export default classes;
 }
 declare module '*.less' {
+  const content: { [key: string]: any }
+  export default content
+}
+declare module '*.mp3' {
   const content: { [key: string]: any }
   export default content
 }
