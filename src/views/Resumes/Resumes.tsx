@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:29:08
- * @LastEditTime: 2021-03-12 13:20:51
+ * @LastEditTime: 2021-03-15 15:07:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Resumes/Resumes.tsx
@@ -11,9 +11,8 @@ import styles from "./Resumes.module.less";
 import { withStyles } from "@material-ui/core/styles";
 // 引入Header组件
 import Header from "../../components/Header/Header";
-import Music from "../../components/Music/Music";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import { blogDetail,imgURL } from "../../utils/Api";
+// import Music from "../../components/Music/Music";
 // 引入图片
 // import img from "../../assets/images/1587477767089.jpg";
 
@@ -48,6 +47,7 @@ class Resumes extends Component {
       ],
     };
   }
+
   render() {
     const state: any = this.state;
     const props: any = this.props;

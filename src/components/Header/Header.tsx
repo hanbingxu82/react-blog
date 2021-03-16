@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-07 09:55:48
- * @LastEditTime: 2021-03-09 11:03:46
+ * @LastEditTime: 2021-03-15 15:59:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/components/Header/Header.tsx
@@ -20,6 +20,7 @@ class Header extends Component {
   }
   goNav=(nav:string)=>{
     const props:any = this.props
+    console.log(nav)
     props.history.push({pathname:nav})
   }
   render() {

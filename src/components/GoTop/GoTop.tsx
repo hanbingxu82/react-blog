@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-08 13:29:34
- * @LastEditTime: 2021-03-08 13:46:35
+ * @LastEditTime: 2021-03-15 16:02:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/components/GoTop/GoTop.tsx
@@ -25,7 +25,6 @@ class Totop extends PureComponent<Props, State> {
     this.goTop = this.goTop.bind(this);
   }
   componentDidMount() {
-      console.log(123123)
     window.addEventListener("scroll", this.handleScroll);
   }
   componentWillUnmount() {
@@ -34,11 +33,9 @@ class Totop extends PureComponent<Props, State> {
   handleScroll() {
     let scrolltop = docuEle.scrollTop;
     let minHei = docuEle.clientHeight / 2/2;
-    console.log(scrolltop , minHei)
     let show = false;
     scrolltop > minHei ? (show = true) : (show = false);
     this.setState({ show });
-    console.log(show)
   }
   goTop() {
     let time = 0;

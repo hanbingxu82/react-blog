@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-11 10:51:33
+ * @LastEditTime: 2021-03-15 16:27:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -14,12 +14,20 @@ import styles from "./Home.module.less";
 // 引入Header组件
 import Header from "../../components/Header/Header";
 
-// 引入图片
-import img from "../../assets/images/1587477767089.jpg";
-// import imgSrc from '../../assets/images/gotop.png'
+// 引入转换年月日时分秒函数
+import {Format} from "../../utils/time";
+
+import { blogList,imgURL } from "../../utils/Api";
 
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
+interface IdetailData{
+  title:string;
+  content:string;
+  details:string;
+  img:string;
+  createTime:string;
+}
 class Home extends Component {
   constructor(props: any) {
     super(props);
@@ -38,7 +46,23 @@ class Home extends Component {
           href: "/Messages",
         },
       ],
+      blogListData: [],
     };
+  }
+  async componentDidMount() {
+    // 生命周期获取数据
+    const res: any = await blogList();
+    if (res.code === 200) {
+      res.data.forEach((item:IdetailData)=>{
+        let date = new Date(item.createTime).getTime()
+        item.createTime = Format(date,"yyyy-MM-dd")
+      })
+      this.setState({
+        blogListData: res.data,
+      });
+    }else{
+      console.log('查询失败')
+    }
   }
   /**
    * @description: 跳转详情路由
@@ -46,9 +70,9 @@ class Home extends Component {
    * @return {*}
    */
   goDetails = (id: string) => {
-      const props :any = this.props
-      window.sessionStorage.setItem('detailsId',id)
-      props.history.push({pathname:'/Details'})
+    const props: any = this.props;
+    window.sessionStorage.setItem("detailsId", id);
+    props.history.push({ pathname: "/Details" });
   };
   login = () => {};
   render() {
@@ -56,11 +80,11 @@ class Home extends Component {
     const props: any = this.props;
     return (
       <div>
-        <Header active="/" {...state} {...props}  />
-        {state.navName.map((item: any) => {
+        <Header active="/" {...state} {...props} />
+        {state.blogListData.map((item: any) => {
           /* 内容区域 */ console.log(item);
           return (
-            <div key={item.href} className={styles.box}>
+            <div key={item.id} className={styles.box}>
               {/* 左侧线 */}
               <div className={styles.leftLine}>
                 <span className={styles.circle}></span>
@@ -72,25 +96,30 @@ class Home extends Component {
                 <div
                   className={styles.dates}
                   onClick={() => {
-                    this.goDetails("5e9efd26601bd82819211a1e");
+                    this.goDetails(item.id);
                   }}
                 >
                   <span className={styles.trig}></span>
-                  <span className={styles.date}>2019.03.20</span>
+                  <span className={styles.date}>{item.createTime}</span>
                 </div>
                 {/* 内容显示区--标题内容 */}
                 <div className={styles.title}>
-                  <p className={styles.p} onClick={() => {
-                    this.goDetails("5e9efd26601bd82819211a1e");
-                  }}>ubuntu 从零搭建环境，部署项目</p>
+                  <p
+                    className={styles.p}
+                    onClick={() => {
+                      this.goDetails(item.id);
+                    }}
+                  >
+                    {item.title}
+                  </p>
                 </div>
                 {/* 内容显示区--图片区 */}
                 <div className={styles.imgs}>
-                  <img src={img} alt="" />
+                  <img src={imgURL+item.img} alt="" />
                 </div>
                 {/* 内容显示区--详情内容 */}
                 <div className={styles.details}>
-                  <p className={styles.p}>从零开始搭建服务器环境的步骤</p>
+                  <p className={styles.p}>{item.details}</p>
                 </div>
               </div>
             </div>
