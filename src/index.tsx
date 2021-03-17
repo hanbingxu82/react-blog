@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 15:39:30
- * @LastEditTime: 2021-03-09 08:58:45
+ * @LastEditTime: 2021-03-17 08:21:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/index.tsx
@@ -14,7 +14,7 @@ import routers from './router';
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode> 关闭严格模式
     <HashRouter>
       <Switch>
         {routers.map((v) => (
@@ -22,7 +22,8 @@ ReactDOM.render(
         ))}
       </Switch>
     </HashRouter>
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById("root")
 );
 
