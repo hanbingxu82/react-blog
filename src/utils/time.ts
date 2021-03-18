@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-15 16:23:20
- * @LastEditTime: 2021-03-17 13:39:13
+ * @LastEditTime: 2021-03-17 18:11:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/utils/time.ts
@@ -30,7 +30,7 @@ export const Format = (datetime: any, fmt = "yyyy-MM-dd hh:mm:ss") => {
   return fmt;
 };
 
-const Formatup = (data: any) => {
+export const Formatup = (data: any) => {
   //let str = data;
   //将字符串转换成时间格式
   let timePublish: any = new Date(data);
@@ -99,3 +99,14 @@ export const isEquipment = () => {
     return isMobile.any()
   }
 };
+
+function getRandom(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+// 返回我们要的颜色
+export const  getRandomColor = ()=> {
+    var c1 = getRandom(0, 255);
+    var c2 = getRandom(0, 255);
+    var c3 = getRandom(0, 255);
+    return 'rgb(' + c1 + ',' + c2 + ',' + c3 + ')'
+}

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-15 11:07:58
- * @LastEditTime: 2021-03-17 13:52:15
+ * @LastEditTime: 2021-03-17 17:25:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/utils/Api.ts
@@ -19,11 +19,17 @@ export const blogList = (params: object = {}) => {
 export const blogDetail = (params: object = {}) => {
   return service.get("/blogDetail", params);
 };
-
+// 查询是否注册接口
 export const userDetail = (params: object = {}) => {
   return service.post("/userDetail", params);
 };
 
+// 登录接口
 export const userLogin = (params: object = {}) => {
   return service.post("/userLogin", params);
+};
+
+// 获取留言列表接口
+export const msgList = (params: object = {}) => {
+  return service.get("/msgList", params);
 };

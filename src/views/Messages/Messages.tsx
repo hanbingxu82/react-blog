@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-03-17 16:04:54
+ * @LastEditTime: 2021-03-18 09:13:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
@@ -22,15 +22,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
 // 引入api
-import { userDetail, userLogin } from "../../utils/Api";
+import { userDetail, userLogin, msgList } from "../../utils/Api";
 // 引入utils公有函数包
-import { isEquipment } from "../../utils/time";
+import { isEquipment, Formatup, getRandomColor } from "../../utils/time";
 
 const MaterialStyle = {
   inputWidth: {
     width: "100%",
   },
 };
+// 用户接口
 interface Iuser {
   email: string;
   username: string;
@@ -38,8 +39,16 @@ interface Iuser {
   ip: string;
   address: string;
   istype: string | undefined | boolean;
-  islogin: boolean;
+  islogin?: boolean;
 }
+// 留言接口
+interface Imessage {
+  username: string;
+  parentId: number;
+  content: string;
+  psvp: string;
+}
+
 class Messages extends Component {
   constructor(props: any) {
     super(props);
@@ -70,6 +79,12 @@ class Messages extends Component {
           href: "/Messages",
         },
       ],
+      message: {
+        username: "",
+        parentId:0,
+        content: "",
+        psvp: "",
+      },
       ruleEmail: false,
       ruleUserName: false,
       rulePassword: false,
@@ -77,6 +92,8 @@ class Messages extends Component {
       helperUsername: " ",
       helperPassword: " ",
       userInfo: {},
+      msgListData: [],
+      pageY:'',// 到顶部的距离
     };
   }
   // value留言框变更时触发事件
@@ -224,7 +241,7 @@ class Messages extends Component {
           window.localStorage.setItem("user", JSON.stringify(res.data));
           this.setState({
             loginState: true,
-            userInfo:res.data
+            userInfo: res.data,
           });
           this.openClose();
         }
@@ -241,10 +258,54 @@ class Messages extends Component {
     window.localStorage.removeItem("user");
     this.setState({
       loginState: false,
-      userInfo: {}
+      userInfo: {},
     });
   };
-  componentDidMount() {
+  /**
+   * @description: 发表事件
+   * @param {*}
+   * @return {*}
+   */
+  enter = () => {};
+  /**
+   * @description: 回复函数
+   * @param {*}
+   * @return {*}
+   */
+  reply = (e: any,row: Iuser) => {
+    const state:any = this.state
+    // 获取当前也就是点击当前回复按钮人的数据
+    
+document.body.scrollTop=document.documentElement.scrollTop=0
+    // 获取当前点击的节点到顶部的距离
+    // this.setState({
+    //   pageY:e.pageY
+    // })
+    
+  };
+  async componentDidMount() {
+    const state: any = this.state;
+    const res: any = await msgList();
+    if (res.ok) {
+      res.data.forEach((item: any) => {
+        item.children = [];
+      });
+      res.data.forEach((item: any, index: number) => {
+        if (item.parentId !== 0) {
+          let farr = res.data.filter((fitem: any) => {
+            return fitem.id === item.parentId;
+          });
+          farr[0].children.push(item);
+        }
+      });
+      // 不等于0删除
+      res.data = res.data.filter((item: any) => {
+        return item.parentId === 0;
+      });
+      this.setState({
+        msgListData: res.data,
+      });
+    }
     const userInfo: any = window.localStorage.getItem("user");
     if (userInfo) {
       this.setState({
@@ -257,6 +318,7 @@ class Messages extends Component {
       });
     }
   }
+
   render() {
     const state: any = this.state;
     const props: any = this.props;
@@ -278,41 +340,79 @@ class Messages extends Component {
               </Button>
             )}
           </div>
-          <TextField error={false} helperText={"Incorrect entry."} className={props.classes.inputWidth} size="small" value={state.text} onChange={this.handleChange} label={state.userInfo.username||"先登录吧！"} multiline rows={4} variant="outlined" />
+          <TextField className={props.classes.inputWidth} size="small" value={state.text} onChange={this.handleChange} label={state.userInfo.username || "先登录吧！"} multiline rows={4} variant="outlined" />
+          {state.loginState ? (
+            <Button onClick={this.enter} color="secondary">
+              发表
+            </Button>
+          ) : (
+            ""
+          )}
           {/* 留言内容区域 */}
           <div className={styles.msgBox}>
-            <div className={styles.msgItem}>
-              <p>{90}楼</p>
-              <div className={styles.msg}>
-                <div>
-                  <span className={styles.name}>章</span>
-                </div>
-                <div className={styles.right}>
-                  <div>
-                    <span className={styles.nameTitle}>{"我是一个小仙男"}</span> <span className={styles.dates}>1个月前</span>
-                  </div>
-                  <div className={styles.msgContent}>{"github没有后端代码"}</div>
-                  <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className={styles.huifu}>回复</span>{" "}
-                  </div>
-                  {/* 如果有回复 */}
+            {state.msgListData.map((item: any, index: number) => {
+              return (
+                <div className={styles.msgItem}>
+                  <p>{state.msgListData.length - index}楼</p>
                   <div className={styles.msg}>
                     <div>
-                      <span className={styles.name}>章</span>
+                      <span className={styles.name} style={{ backgroundColor: getRandomColor() }}>
+                        {item.username.substr(0, 1)}
+                      </span>
                     </div>
                     <div className={styles.right}>
                       <div>
-                        <span className={styles.nameTitle}>{"我是一个小仙男"}</span> <span className={styles.dates}>1个月前</span>
+                        <span className={styles.nameTitle}>{item.username}</span> <span className={styles.dates}>{Formatup(item.createTime)}</span>
                       </div>
-                      <div className={styles.msgContent}>{"github没有后端代码"}</div>
+                      <div className={styles.msgContent}>{item.content}</div>
                       <div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span className={styles.huifu}>回复</span>{" "}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                        <span
+                          onClick={(event) => {
+                            this.reply(event,item);
+                          }}
+                          className={styles.huifu}
+                        >
+                          回复
+                        </span>
                       </div>
+                      {/* 如果有回复 */}
+                      {item.children.map((itemChildren: any, indexChildren: number) => {
+                        return (
+                          <div className={styles.msg}>
+                            <div>
+                              <span className={styles.name} style={{ backgroundColor: getRandomColor() }}>
+                                {itemChildren.username.substr(0, 1)}
+                              </span>
+                            </div>
+                            <div className={styles.right}>
+                              <div>
+                                <span className={styles.nameTitle}>{itemChildren.username}</span> <span className={styles.dates}>{Formatup(itemChildren.createTime)}</span>
+                              </div>
+                              <div className={styles.msgContent}>
+                                <span style={{ color: "#948c76" }}>@{itemChildren.psvp}:&nbsp;&nbsp;</span>
+                                {itemChildren.content}
+                              </div>
+                              <div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                                <span
+                                  className={styles.huifu}
+                                  onClick={(event) => {
+                                    this.reply(event,itemChildren);
+                                  }}
+                                >
+                                  回复
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
         {/* 底部备案号 */}
