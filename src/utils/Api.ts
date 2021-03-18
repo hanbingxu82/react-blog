@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-15 11:07:58
- * @LastEditTime: 2021-03-17 17:25:49
+ * @LastEditTime: 2021-03-18 10:55:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/utils/Api.ts
@@ -33,3 +33,8 @@ export const userLogin = (params: object = {}) => {
 export const msgList = (params: object = {}) => {
   return service.get("/msgList", params);
 };
+
+// 新增留言接口
+export const addMsgList = (params:object={})=>{
+  return service.post('/addMsgList',params)
+}

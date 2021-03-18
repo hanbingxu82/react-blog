@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:29:08
- * @LastEditTime: 2021-03-15 15:07:33
+ * @LastEditTime: 2021-03-18 15:03:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Resumes/Resumes.tsx
@@ -11,7 +11,7 @@ import styles from "./Resumes.module.less";
 import { withStyles } from "@material-ui/core/styles";
 // 引入Header组件
 import Header from "../../components/Header/Header";
-import { blogDetail,imgURL } from "../../utils/Api";
+// import { blogDetail,imgURL } from "../../utils/Api";
 // import Music from "../../components/Music/Music";
 // 引入图片
 // import img from "../../assets/images/1587477767089.jpg";

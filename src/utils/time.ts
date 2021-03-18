@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-15 16:23:20
- * @LastEditTime: 2021-03-17 18:11:48
+ * @LastEditTime: 2021-03-18 13:32:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/utils/time.ts
@@ -90,23 +90,43 @@ export const isEquipment = () => {
   if (isMobile.iOS()) {
     return "ios";
   } else if (isMobile.Android()) {
-    return "android"
+    return "android";
   } else if (isMobile.BlackBerry()) {
-    return "blackberry"
+    return "blackberry";
   } else if (isMobile.Windows()) {
-    return "windows"
+    return "windows";
   } else if (isMobile.any()) {
-    return isMobile.any()
+    return isMobile.any();
   }
 };
 
-function getRandom(min:number, max:number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function getRandom(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 // 返回我们要的颜色
-export const  getRandomColor = ()=> {
-    var c1 = getRandom(0, 255);
-    var c2 = getRandom(0, 255);
-    var c3 = getRandom(0, 255);
-    return 'rgb(' + c1 + ',' + c2 + ',' + c3 + ')'
-}
+export const getRandomColor = () => {
+  var c1 = getRandom(0, 255);
+  var c2 = getRandom(0, 255);
+  var c3 = getRandom(0, 255);
+  return "rgb(" + c1 + "," + c2 + "," + c3 + ")";
+};
+
+let time:any=""
+export const tips = (msg: string) => {
+  const tips: any = document.querySelector(".tips");
+  const body: any = document.querySelector("body");
+  if(tips){
+    body.removeChild(tips);
+    clearTimeout(time)
+  }
+  var div = document.createElement("div");
+  div.className = "tips"; //添加div的class的时候注意是className
+  div.innerHTML = msg;
+  body.appendChild(div);
+  time= setTimeout(() => {
+    const tips: any = document.querySelector(".tips");
+    if(tips){
+    body.removeChild(tips);
+  }
+  }, 2000);
+};

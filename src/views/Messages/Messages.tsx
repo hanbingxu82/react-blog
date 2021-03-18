@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-03-18 09:13:46
+ * @LastEditTime: 2021-03-18 15:04:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
  */
-import React, { Component, useRef } from "react";
+import React, { Component } from "react";
 import styles from "./Messages.module.less";
 // 引入Header组件
 import Header from "../../components/Header/Header";
@@ -19,12 +19,13 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
+// import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
 // 引入api
-import { userDetail, userLogin, msgList } from "../../utils/Api";
+import { userDetail, userLogin, msgList, addMsgList } from "../../utils/Api";
 // 引入utils公有函数包
-import { isEquipment, Formatup, getRandomColor } from "../../utils/time";
+import { isEquipment, Formatup, getRandomColor,tips } from "../../utils/time";
 
 const MaterialStyle = {
   inputWidth: {
@@ -33,6 +34,7 @@ const MaterialStyle = {
 };
 // 用户接口
 interface Iuser {
+  id: number;
   email: string;
   username: string;
   password: string;
@@ -42,12 +44,12 @@ interface Iuser {
   islogin?: boolean;
 }
 // 留言接口
-interface Imessage {
-  username: string;
-  parentId: number;
-  content: string;
-  psvp: string;
-}
+// interface Imessage {
+//   username: string;
+//   parentId: number;
+//   content: string;
+//   psvp: string;
+// }
 
 class Messages extends Component {
   constructor(props: any) {
@@ -81,7 +83,7 @@ class Messages extends Component {
       ],
       message: {
         username: "",
-        parentId:0,
+        parentId: 0,
         content: "",
         psvp: "",
       },
@@ -93,15 +95,17 @@ class Messages extends Component {
       helperPassword: " ",
       userInfo: {},
       msgListData: [],
-      pageY:'',// 到顶部的距离
+      pageY: 0, // 到顶部的距离
+      leftTip: "",
     };
   }
   // value留言框变更时触发事件
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    (this.state as any).message.content = event.target.value;
     this.setState({
-      text: event.target.value,
+      message: (this.state as any).message,
     });
+    console.log((this.state as any).message);
   };
   /**
    * @description: 更改email  email
@@ -223,30 +227,39 @@ class Messages extends Component {
    * @return {*}
    */
   login = async () => {
+
     // 获取ip  与  计算机类型
     const state: any = this.state;
-    const user: Iuser = state.user;
-    const userIpAd = (window as any).returnCitySN;
-    const istype: boolean | "ios" | "android" | "blackberry" | "windows" | undefined = isEquipment();
-    user.ip = userIpAd.cip;
-    user.address = userIpAd.cname;
-    user.istype = istype;
-    this.setState(
-      {
-        user: user,
-      },
-      async () => {
-        const res: any = await userLogin(state.user);
-        if (res.ok) {
-          window.localStorage.setItem("user", JSON.stringify(res.data));
-          this.setState({
-            loginState: true,
-            userInfo: res.data,
-          });
-          this.openClose();
+    if(state.user.email&&state.user.username&&state.user.password){
+      const user: Iuser = state.user;
+      const userIpAd = (window as any).returnCitySN;
+      const istype: boolean | "ios" | "android" | "blackberry" | "windows" | undefined = isEquipment();
+      user.ip = userIpAd.cip;
+      user.address = userIpAd.cname;
+      user.istype = istype;
+      this.setState(
+        {
+          user: user,
+        },
+        async () => {
+          const res: any = await userLogin(state.user);
+          if (res.ok) {
+            window.localStorage.setItem("user", JSON.stringify(res.data));
+            this.setState({
+              loginState: true,
+              userInfo: res.data,
+            });
+            this.openClose();
+            tips('登录成功！')
+          }else{
+            tips('登录失败，邮箱或密码错误！')
+          }
         }
-      }
-    );
+      );
+    }else{
+      tips('请输入填写内容！')
+    }
+
   };
 
   /**
@@ -256,6 +269,7 @@ class Messages extends Component {
    */
   logoout = () => {
     window.localStorage.removeItem("user");
+
     this.setState({
       loginState: false,
       userInfo: {},
@@ -266,29 +280,80 @@ class Messages extends Component {
    * @param {*}
    * @return {*}
    */
-  enter = () => {};
+  enter = async () => {
+    const state: any = this.state;
+    // 获取当前的用户的用户名
+    state.message.username = state.userInfo.username;
+    this.setState({
+      message: state.message,
+    });
+    const res: any = await addMsgList(state.message);
+    if (res.ok) {
+      // 发表成功后清除clear
+      this.clear();
+      this.getMsgList()
+      document.body.scrollTop = document.documentElement.scrollTop = state.pageY;
+    }else{
+      tips('不支持存储表情，后续即将开放！')
+    }
+  };
+  /**
+   * @description: 清除留言框事件
+   * @param {*}
+   * @return {*}
+   */
+  clear = () => {
+    const state: any = this.state;
+    state.leftTip = "";
+    state.message.psvp = "";
+    state.message.content = "";
+    state.message.parentId = 0;
+    this.setState({
+      leftTip: state.leftTip,
+      message: state.message,
+      pageY: 200,
+    });
+  };
   /**
    * @description: 回复函数
    * @param {*}
    * @return {*}
    */
-  reply = (e: any,row: Iuser) => {
-    const state:any = this.state
+  reply = (e: any, row: Iuser,parent?:Iuser) => {
+    const state: any = this.state;
     // 获取当前也就是点击当前回复按钮人的数据
-    
-document.body.scrollTop=document.documentElement.scrollTop=0
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    state.leftTip = "@" + row.username + ":";
+    state.message.psvp = row.username;
+    state.message.parentId = row.id;
+    if(parent){
+      state.message.parentId = parent.id;
+    }
+    this.setState({
+      leftTip: state.leftTip,
+      message: state.message,
+      pageY: e.pageY,
+    });
     // 获取当前点击的节点到顶部的距离
     // this.setState({
     //   pageY:e.pageY
     // })
-    
   };
-  async componentDidMount() {
-    const state: any = this.state;
+   componentDidMount() {
+    this.getMsgList()
+  }
+  /**
+   * @description: 获取留言数据
+   * @param {*}
+   * @return {*}
+   */
+  getMsgList = async() => {
+    // const state: any = this.state;
     const res: any = await msgList();
     if (res.ok) {
       res.data.forEach((item: any) => {
         item.children = [];
+        item.rgb = getRandomColor();
       });
       res.data.forEach((item: any, index: number) => {
         if (item.parentId !== 0) {
@@ -317,7 +382,7 @@ document.body.scrollTop=document.documentElement.scrollTop=0
         loginState: false,
       });
     }
-  }
+  };
 
   render() {
     const state: any = this.state;
@@ -340,11 +405,28 @@ document.body.scrollTop=document.documentElement.scrollTop=0
               </Button>
             )}
           </div>
-          <TextField className={props.classes.inputWidth} size="small" value={state.text} onChange={this.handleChange} label={state.userInfo.username || "先登录吧！"} multiline rows={4} variant="outlined" />
+          <TextField
+            InputProps={{
+              startAdornment: <InputAdornment position="start">{state.leftTip}</InputAdornment>,
+            }}
+            className={props.classes.inputWidth}
+            size="small"
+            value={state.message.content}
+            onChange={this.handleChange}
+            label={state.userInfo.username || "先登录吧！"}
+            multiline
+            rows={4}
+            variant="outlined"
+          />
           {state.loginState ? (
-            <Button onClick={this.enter} color="secondary">
-              发表
-            </Button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button onClick={this.enter} color="secondary">
+                发表
+              </Button>
+              <Button onClick={this.clear} color="secondary">
+                清空
+              </Button>
+            </div>
           ) : (
             ""
           )}
@@ -352,11 +434,11 @@ document.body.scrollTop=document.documentElement.scrollTop=0
           <div className={styles.msgBox}>
             {state.msgListData.map((item: any, index: number) => {
               return (
-                <div className={styles.msgItem}>
+                <div key={item.id} className={styles.msgItem}>
                   <p>{state.msgListData.length - index}楼</p>
                   <div className={styles.msg}>
                     <div>
-                      <span className={styles.name} style={{ backgroundColor: getRandomColor() }}>
+                      <span className={styles.name} style={{ backgroundColor: item.rgb }}>
                         {item.username.substr(0, 1)}
                       </span>
                     </div>
@@ -366,10 +448,10 @@ document.body.scrollTop=document.documentElement.scrollTop=0
                       </div>
                       <div className={styles.msgContent}>{item.content}</div>
                       <div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span
                           onClick={(event) => {
-                            this.reply(event,item);
+                            this.reply(event, item);
                           }}
                           className={styles.huifu}
                         >
@@ -379,9 +461,9 @@ document.body.scrollTop=document.documentElement.scrollTop=0
                       {/* 如果有回复 */}
                       {item.children.map((itemChildren: any, indexChildren: number) => {
                         return (
-                          <div className={styles.msg}>
+                          <div key={itemChildren.id} className={styles.msg}>
                             <div>
-                              <span className={styles.name} style={{ backgroundColor: getRandomColor() }}>
+                              <span className={styles.name} style={{ backgroundColor: itemChildren.rgb }}>
                                 {itemChildren.username.substr(0, 1)}
                               </span>
                             </div>
@@ -398,7 +480,7 @@ document.body.scrollTop=document.documentElement.scrollTop=0
                                 <span
                                   className={styles.huifu}
                                   onClick={(event) => {
-                                    this.reply(event,itemChildren);
+                                    this.reply(event, itemChildren,item);
                                   }}
                                 >
                                   回复
@@ -421,7 +503,7 @@ document.body.scrollTop=document.documentElement.scrollTop=0
             © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
           </p>
         </div>
-        {/* <Music /> */}
+        <Music />
         <Gotop />
 
         {/* 弹窗区域 */}

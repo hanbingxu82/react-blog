@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-08 14:09:04
- * @LastEditTime: 2021-03-15 17:32:45
+ * @LastEditTime: 2021-03-18 15:03:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Details/Deatils.tsx
@@ -11,7 +11,7 @@ import styles from "./Details.module.less";
 
 // 引入Header组件
 import Header from "../../components/Header/Header";
-import { blogDetail, imgURL } from "../../utils/Api";
+import { blogDetail, } from "../../utils/Api";
 // 引入转换年月日时分秒函数
 import {Format} from "../../utils/time";
 
