@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-15 11:07:44
- * @LastEditTime: 2021-03-17 13:08:28
+ * @LastEditTime: 2021-03-18 16:10:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/utils/axios.js
@@ -115,5 +115,6 @@ export default {
   login,
   upload,
   imgURL,
+  baseURL,
   axios
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:29:08
- * @LastEditTime: 2021-03-18 15:03:22
+ * @LastEditTime: 2021-03-18 16:08:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Resumes/Resumes.tsx
@@ -11,6 +11,7 @@ import styles from "./Resumes.module.less";
 import { withStyles } from "@material-ui/core/styles";
 // 引入Header组件
 import Header from "../../components/Header/Header";
+
 // import { blogDetail,imgURL } from "../../utils/Api";
 // import Music from "../../components/Music/Music";
 // 引入图片
@@ -19,6 +20,8 @@ import Header from "../../components/Header/Header";
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
 
+// 下载文件组件
+import DownLoad from "../../components/DownLoad/DownLoad";
 const ResumesStyle = {
   inputWidth: {
     paper: {
@@ -234,6 +237,7 @@ class Resumes extends Component {
           </p>
         </div>
         <Gotop />
+        <DownLoad />
         {/* <Music /> */}
       </div>
     );
