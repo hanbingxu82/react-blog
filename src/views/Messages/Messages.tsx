@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-03-18 15:04:05
+ * @LastEditTime: 2021-07-14 17:10:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
@@ -105,7 +105,6 @@ class Messages extends Component {
     this.setState({
       message: (this.state as any).message,
     });
-    console.log((this.state as any).message);
   };
   /**
    * @description: 更改email  email
@@ -500,7 +499,7 @@ class Messages extends Component {
         {/* 底部备案号 */}
         <div>
           <p className={styles.bottomp}>
-            © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
+            © Tinkerbell | <a href="https://beian.miit.gov.cn">冀ICP备2021015986号-1</a>
           </p>
         </div>
         <Music />

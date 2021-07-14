@@ -9,7 +9,7 @@
         width: .2rem;
         height: 100%;
         position: relative;
-        overflow: hidden;
+        // overflow: hidden;
 
         .circle {
             display: block;
@@ -42,6 +42,7 @@
             cursor: pointer;
             margin-left: 15px;
             top: 4px;
+            transition: all 1s;
 
             .trig {
                 width: 0px;
@@ -69,10 +70,14 @@
                 vertical-align: top;
             }
         }
+        .dates:hover{
+            margin-left: 25px;
+
+        }
 
         .title {
             height: 42px;
-
+            cursor: pointer;
             p {
                 padding: .2rem 0 .1rem 0;
             }
@@ -109,6 +114,6 @@
 }
 @media screen and (max-width: 450px){
     .box {
-        padding: 10%;
+        padding: 0 10%;
     }
 }

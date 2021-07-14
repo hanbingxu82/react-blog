@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:29:08
- * @LastEditTime: 2021-03-18 16:08:35
+ * @LastEditTime: 2021-07-14 17:03:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Resumes/Resumes.tsx
@@ -69,7 +69,7 @@ class Resumes extends Component {
               <div className={styles.col_4}>前端开发 | 3 年工作经验</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col_4}>期望职位：Web高级前端</div>
+              <div className={styles.col_4}>期望职位：Web前端</div>
               <div className={styles.col_4}>期望城市：北京</div>
             </div>
             <div className={styles.row}>
@@ -95,7 +95,7 @@ class Resumes extends Component {
             <div className={styles.row}>
               <div className={styles.col_4}>手机：18731283611</div>
               <div className={styles.col_4}>Email：hbx831@126.com</div>
-              <div className={styles.col_4}>网站：www.smalltinkerbell.com</div>
+              <div className={styles.col_4}>网站：<a href="https://tinkerbell.top" target="_blank" rel="noopener noreferrer">www.tinkerbell.top</a> </div>
             </div>
           </div>
           {/* 技能掌握模块 */}
@@ -108,10 +108,10 @@ class Resumes extends Component {
               <div className={styles.col}>- 三年开发经验, 可快速上手项目开发、掌握业务逻辑, 并从代码角度为项目提供最优方案。</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 前端技术栈擅长Vue, 微信小程序, uni-app, React, 擅长组件开发及构建优化。</div>
+              <div className={styles.col}>- 前端技术栈擅长Vue, 微信小程序, Layui, JQuery, uni-app, React, 擅长组件开发及构建优化。</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 后端熟练使用Nodejs, Express 开发，数据库熟悉 MySQL。</div>
+              <div className={styles.col}>- 后端掌握Nodejs, Express 开发，数据库熟悉 MySQL。</div>
             </div>
             <div className={styles.row}>
               <div className={styles.col}>- 长期维护线上个人技术博客，能独立完成项目开发，前后端通调。</div>
@@ -129,10 +129,10 @@ class Resumes extends Component {
               </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 负责小组日常前端开发、维护工作，参与项目需求研讨，设计项目前端架构</div>
+              <div className={styles.col}>- 负责小组日常前端开发、维护工作，参与项目需求研讨</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 对接需求、后端实现需求，呈现页面效果</div>
+              <div className={styles.col}>- 根据客户需求，对接后端接口，定制化开发呈现页面效果</div>
             </div>
             <div className={styles.row}>
               <div className={styles.col}>- 项目技术难点突破，承担前端核心功能开发</div>
@@ -196,30 +196,27 @@ class Resumes extends Component {
 
           <div className={styles.box_bg}>
             <div className={styles.row}>
-              <div className={styles.col}>睿联环保后台管理系统（ 2019 年 06 月 ~ 2019 年 10 月 ）</div>
+              <div className={styles.col}>CAMDS 中国汽车材料数据系统（ 2021 年 06 月 ~ 2021 年 07 月 ）</div>
             </div>
             <div className={styles.row}>
               <div className={styles.col}>
-                <p>前端开发</p>
+                <p>前端开发/重构</p>
               </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>睿联环保后台管理系统，供与睿联环保商家后台的一个管理系统，实现商家后台的可视化，商家后台一些列数据的管理。</div>
+              <div className={styles.col}>CAMDS 中国汽车材料数据系统 是为了提高中国汽车材料回收利用率而开发的产品数据管理平台</div>
             </div>
             <div className={styles.row}>
               <div className={styles.col}><p>功能难点：</p> </div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 多用户角色：不同角色对应不同权限逻辑处理</div>
+              <div className={styles.col}>- 由vue开发单页面官网，重构采用 Nuxt.js(ssr) 服务端渲染实现seo优化爬虫抓取</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 优化用户体验：懒加载以减缓渲染时常、高度组件化、模块化形成界面统一风格</div>
+              <div className={styles.col}>- 页面拆分，组件详细划分，路由采用动态路由实现文章分享功能</div>
             </div>
             <div className={styles.row}>
-              <div className={styles.col}>- 复杂业务流程：如礼品管理、新人课程、素材中心、工程案例、家庭案例、新车案例、好友、奖金管理、审批打款等</div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.col}>- 复杂逻辑处理：多文件异步上传、复杂表单验证、html canvas图表导出、多级分销等</div>
+              <div className={styles.col}>- 复杂业务逻辑重新整理，封装复用组件，摒弃耦合代码</div>
             </div>
           </div>
         {/* 自我评价 */}
@@ -233,7 +230,7 @@ class Resumes extends Component {
         {/* 底部备案号 */}
         <div>
           <p className={styles.bottomp}>
-            © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
+            © Tinkerbell | <a href="https://beian.miit.gov.cn">冀ICP备2021015986号-1</a>
           </p>
         </div>
         <Gotop />

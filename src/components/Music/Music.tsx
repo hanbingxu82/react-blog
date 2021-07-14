@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-11 08:22:40
- * @LastEditTime: 2021-03-11 10:13:17
+ * @LastEditTime: 2021-07-14 17:07:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/components/Music/Music.tsx
@@ -31,7 +31,6 @@ class Music extends PureComponent<Props,State>{
   changePlay(){
     // const mybgm = this.refs["mybgm"] as any;
     // 如果音乐暂停就播放否则暂停
-    console.log( this.mybgm)
     this.mybgm.current.paused ? this.mybgm.current.play() : this.mybgm.current.pause();
     this.setState({
       play: !this.state.play
@@ -40,7 +39,6 @@ class Music extends PureComponent<Props,State>{
   componentDidMount(){
     // setTimeout(() => {
     //   this.mybgm = this.mybgm.current
-    //   console.log(this.mybgm)
     //   this.mybgm.play()
     // }, 1000);
   }

@@ -227,7 +227,7 @@ class Details extends Component {
         {/* 底部备案号 */}
         <div>
           <p className={styles.bottomp}>
-            © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
+            © Tinkerbell | <a href="https://beian.miit.gov.cn">冀ICP备2021015986号-1</a>
           </p>
         </div>
         <Gotop />

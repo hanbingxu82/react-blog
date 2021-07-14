@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-03-17 13:06:32
+ * @LastEditTime: 2021-07-14 17:13:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -83,7 +83,7 @@ class Home extends Component {
       <div>
         <Header active="/" {...state} {...props} />
         {state.blogListData.map((item: any) => {
-          /* 内容区域 */ console.log(item);
+          /* 内容区域 */ 
           return (
             <div key={item.id} className={styles.box}>
               {/* 左侧线 */}
@@ -128,7 +128,7 @@ class Home extends Component {
         })}
         <div>
           <p className={styles.bottomp}>
-            © SmallTinkerbell | <a href="http://www.miitbeian.gov.cn">蜀ICP备200008xx号</a>
+            © Tinkerbell | <a href="https://beian.miit.gov.cn">冀ICP备2021015986号-1</a>
           </p>
         </div>
         <Gotop />
