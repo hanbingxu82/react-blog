@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:29:08
- * @LastEditTime: 2021-07-14 17:03:43
+ * @LastEditTime: 2021-07-14 18:59:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Resumes/Resumes.tsx
@@ -19,6 +19,9 @@ import Header from "../../components/Header/Header";
 
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
+// 引入右上角github跳转图标
+import GitHub from '../../components/GitHub/GitHub'
+
 
 // 下载文件组件
 import DownLoad from "../../components/DownLoad/DownLoad";
@@ -234,6 +237,7 @@ class Resumes extends Component {
           </p>
         </div>
         <Gotop />
+        <GitHub />
         <DownLoad />
         {/* <Music /> */}
       </div>

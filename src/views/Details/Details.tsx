@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-08 14:09:04
- * @LastEditTime: 2021-03-18 15:03:12
+ * @LastEditTime: 2021-07-14 18:58:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Details/Deatils.tsx
@@ -17,6 +17,8 @@ import {Format} from "../../utils/time";
 
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
+// 引入右上角github跳转图标
+import GitHub from '../../components/GitHub/GitHub'
 
 class Details extends Component {
   constructor(props: any) {
@@ -231,6 +233,7 @@ class Details extends Component {
           </p>
         </div>
         <Gotop />
+        <GitHub />
       </div>
     );
   }

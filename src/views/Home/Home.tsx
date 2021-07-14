@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-05 16:38:08
- * @LastEditTime: 2021-07-14 17:13:31
+ * @LastEditTime: 2021-07-14 18:52:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/component/Home/Home.tsx
@@ -21,6 +21,9 @@ import { blogList,imgURL } from "../../utils/Api";
 
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
+
+// 引入右上角github跳转图标
+import GitHub from '../../components/GitHub/GitHub'
 
 interface IdetailData{
   title:string;
@@ -132,6 +135,7 @@ class Home extends Component {
           </p>
         </div>
         <Gotop />
+        <GitHub />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-03-09 13:28:55
- * @LastEditTime: 2021-07-14 17:10:22
+ * @LastEditTime: 2021-07-14 18:58:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /blogreact/src/views/Messages/Messages.tsx
@@ -13,6 +13,9 @@ import Header from "../../components/Header/Header";
 import Music from "../../components/Music/Music";
 // 引入点击回到顶部
 import Gotop from "../../components/GoTop/GoTop";
+// 引入右上角github跳转图标
+import GitHub from '../../components/GitHub/GitHub'
+
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -504,6 +507,7 @@ class Messages extends Component {
         </div>
         <Music />
         <Gotop />
+        <GitHub />
 
         {/* 弹窗区域 */}
         <Dialog fullWidth={true} maxWidth={"sm"} open={state.open} keepMounted onClose={this.openClose} aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
