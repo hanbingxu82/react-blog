@@ -32,7 +32,7 @@ class Header extends Component {
         </div>
         {/* 名称部分 */}
         <div className={styles.name}>
-          <p className={styles.p}>SmallTinkerbell</p>
+          <p className={styles.p}>Tinkerbell</p>
         </div>
         {/* 简历  点滴  留言部分 */}
         <div className={styles.nav}>
